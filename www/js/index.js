@@ -38,9 +38,9 @@ function wlCommonInit(){
         }
         msg += "Remaining attempts: " + challenge.remainingAttempts  
         // Display a prompt for user to enter the pin code     
-        var prmpt = prompt(msg, "");
-        if(prmpt){ // calling submitChallengeAnswer with the entered value
-            PinCodeChallengeHandler.submitChallengeAnswer({"pin":prmpt});
+        var pinCode = prompt(msg, "");
+        if(pinCode){ // calling submitChallengeAnswer with the entered value
+            PinCodeChallengeHandler.submitChallengeAnswer({"pin":pinCode});
         }            
         else{ // calling submitFailure in case user pressed the cancel button
             PinCodeChallengeHandler.submitFailure();   
@@ -49,7 +49,12 @@ function wlCommonInit(){
 
     PinCodeChallengeHandler.handleFailure = function(error) {
         WL.Logger.debug("Challenge Handler Failure!");
-        alert("No Remaining Attempts!"); 
+        if(error.failure && error.failure == "account blocked"){
+           alert("No Remaining Attempts!");  
+        }
+        else {
+           alert("Error! " + JSON.stringify(error)); 
+        }
     };
 
     PinCodeChallengeHandler.processSuccess = function (data) {
