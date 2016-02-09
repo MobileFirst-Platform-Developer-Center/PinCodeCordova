@@ -13,6 +13,7 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 */
+var PinCodeChallengeHandler;
 
 var wlInitOptions = {
     // Options to initialize with the WL.Client object.
@@ -22,21 +23,49 @@ var wlInitOptions = {
 // Called automatically after MFP framework initialization by WL.Client.init(wlInitOptions).
 function wlCommonInit(){
     document.getElementById("getBalance").addEventListener("click", getBalance, false);
+    document.getElementById("SubmitPinCode").addEventListener("click",submitPinCode, false);   
+    document.getElementById("PinCodeDiv").style.display = "none";
+    // ChallengeHandler
+    PinCodeChallengeHandler = WL.Client.createWLChallengeHandler("PinCodeAttempts");
+
+    PinCodeChallengeHandler.handleChallenge = function(challenge) { 
+        var status = "";
+        
+        document.getElementById("PinCodeDiv").style.display = "block";
+        if(challenge.errorMsg != null){
+           status = challenge.errorMsg + "<br />"; 
+        }
+        status += "Remaining Attempts: "+ challenge.remainingAttempts;
+        document.getElementById("StatusDiv").innerHTML = status              
+    };
+
+    PinCodeChallengeHandler.handleFailure = function(error) {
+        WL.Logger.debug("Challenge Handler Failure!");
+        document.getElementById("StatusDiv").innerHTML = "No Remaining Attempts!"
+    };
+
+    PinCodeChallengeHandler.processSuccess = function (data) {
+        WL.Logger.debug("Challenge Handler Success!");
+        document.getElementById("PinCodeDiv").style.display = "none";
+    }
+    // ChallengeHandler end
+}
+
+function submitPinCode(){
+    var answer = document.getElementById("PinCodeTextBox").value;
+    PinCodeChallengeHandler.submitChallengeAnswer({"pin":answer});
 }
 
 function getBalance() {
-    var resourceRequest = new WLResourceRequest(
-    "/adapters/ResourceAdapter/balance",
-    WLResourceRequest.GET
-    );
-    
+    var resourceRequest = new WLResourceRequest("/adapters/ResourceAdapter/balance",WLResourceRequest.GET);
+
     resourceRequest.send().then(
         function(response) {
-            WL.Logger.debug(response.responseText);
+            WL.Logger.debug("resourceRequest.send success: "+ response.responseText);           
             document.getElementById("balanceLabel").innerHTML = response.responseText;
         },
         function(response) {
-            WL.Logger.debug(response.errorMsg);
+            WL.Logger.debug(response.responseText);
             document.getElementById("balanceLabel").innerHTML = response.errorMsg;
         }
     );
