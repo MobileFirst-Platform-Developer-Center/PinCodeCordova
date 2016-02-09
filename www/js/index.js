@@ -23,37 +23,39 @@ var wlInitOptions = {
 // Called automatically after MFP framework initialization by WL.Client.init(wlInitOptions).
 function wlCommonInit(){
     document.getElementById("getBalance").addEventListener("click", getBalance, false);
-    document.getElementById("SubmitPinCode").addEventListener("click",submitPinCode, false);   
-    document.getElementById("PinCodeDiv").style.display = "none";
+    
     // ChallengeHandler
     PinCodeChallengeHandler = WL.Client.createWLChallengeHandler("PinCodeAttempts");
 
-    PinCodeChallengeHandler.handleChallenge = function(challenge) { 
-        var status = "";
-        
-        document.getElementById("PinCodeDiv").style.display = "block";
+    PinCodeChallengeHandler.handleChallenge = function(challenge) {
+        var msg = "";
+        // Create the title string for the prompt
         if(challenge.errorMsg != null){
-           status = challenge.errorMsg + "<br />"; 
+            msg =  challenge.errorMsg + "\n";
         }
-        status += "Remaining Attempts: "+ challenge.remainingAttempts;
-        document.getElementById("StatusDiv").innerHTML = status              
+        else{
+            msg = "This data requires a PIN code.\n";
+        }
+        msg += "Remaining attempts: " + challenge.remainingAttempts  
+        // Display a prompt for user to enter the pin code     
+        var prmpt = prompt(msg, "");
+        if(prmpt){ // calling submitChallengeAnswer with the entered value
+            PinCodeChallengeHandler.submitChallengeAnswer({"pin":prmpt});
+        }            
+        else{ // calling submitFailure in case user pressed the cancel button
+            PinCodeChallengeHandler.submitFailure();   
+        }                            
     };
 
     PinCodeChallengeHandler.handleFailure = function(error) {
         WL.Logger.debug("Challenge Handler Failure!");
-        document.getElementById("StatusDiv").innerHTML = "No Remaining Attempts!"
+        alert("No Remaining Attempts!"); 
     };
 
     PinCodeChallengeHandler.processSuccess = function (data) {
         WL.Logger.debug("Challenge Handler Success!");
-        document.getElementById("PinCodeDiv").style.display = "none";
     }
     // ChallengeHandler end
-}
-
-function submitPinCode(){
-    var answer = document.getElementById("PinCodeTextBox").value;
-    PinCodeChallengeHandler.submitChallengeAnswer({"pin":answer});
 }
 
 function getBalance() {
