@@ -1,6 +1,7 @@
 IBM MobileFirst Platform Foundation
 ===
 ## PinCodeCordova
+A sample application demonstrating use of the WithAttempts Security Check.
 
 ### Tutorials
 https://mobilefirstplatform.ibmcloud.com/tutorials/en/foundation/8.0/authentication-and-security/security-check-with-attempts/
