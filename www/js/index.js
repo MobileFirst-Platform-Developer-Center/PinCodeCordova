@@ -23,46 +23,7 @@ var wlInitOptions = {
 // Called automatically after MFP framework initialization by WL.Client.init(wlInitOptions).
 function wlCommonInit(){
     document.getElementById("getBalance").addEventListener("click", getBalance, false);
-    
-    // ChallengeHandler
-    PinCodeChallengeHandler = WL.Client.createWLChallengeHandler("PinCodeAttempts");
-
-    PinCodeChallengeHandler.handleChallenge = function(challenge) {
-        var msg = "";
-        // Create the title string for the prompt
-        if(challenge.errorMsg != null){
-            msg =  challenge.errorMsg + "\n";
-        }
-        else{
-            msg = "This data requires a PIN code.\n";
-        }
-        msg += "Remaining attempts: " + challenge.remainingAttempts  
-        // Display a prompt for user to enter the pin code     
-        var pinCode = prompt(msg, "");
-        if(pinCode){ // calling submitChallengeAnswer with the entered value
-            PinCodeChallengeHandler.submitChallengeAnswer({"pin":pinCode});
-        }            
-        else{ // calling submitFailure in case user pressed the cancel button
-            PinCodeChallengeHandler.submitFailure();   
-        }                            
-    };
-    
-    // handleFailure
-    PinCodeChallengeHandler.handleFailure = function(error) {
-        WL.Logger.debug("Challenge Handler Failure!");
-        if(error.failure && error.failure == "account blocked"){
-           alert("No Remaining Attempts!");  
-        }
-        else {
-           alert("Error! " + JSON.stringify(error)); 
-        }
-    };
-    
-    // processSuccess
-    PinCodeChallengeHandler.processSuccess = function (data) {
-        WL.Logger.debug("Challenge Handler Success!");
-    }
-    // ChallengeHandler end
+    PinCodeChallengeHandler();
 }
 
 function getBalance() {
@@ -70,7 +31,7 @@ function getBalance() {
 
     resourceRequest.send().then(
         function(response) {
-            WL.Logger.debug("resourceRequest.send success: "+ response.responseText);           
+            WL.Logger.debug("resourceRequest.send success: "+ response.responseText);
             document.getElementById("balanceLabel").innerHTML = response.responseText;
         },
         function(response) {
