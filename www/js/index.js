@@ -46,7 +46,8 @@ function wlCommonInit(){
             PinCodeChallengeHandler.submitFailure();   
         }                            
     };
-
+    
+    // handleFailure
     PinCodeChallengeHandler.handleFailure = function(error) {
         WL.Logger.debug("Challenge Handler Failure!");
         if(error.failure && error.failure == "account blocked"){
@@ -56,7 +57,8 @@ function wlCommonInit(){
            alert("Error! " + JSON.stringify(error)); 
         }
     };
-
+    
+    // processSuccess
     PinCodeChallengeHandler.processSuccess = function (data) {
         WL.Logger.debug("Challenge Handler Success!");
     }
