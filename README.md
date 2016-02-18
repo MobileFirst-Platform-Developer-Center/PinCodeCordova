@@ -1,10 +1,10 @@
 IBM MobileFirst Platform Foundation
 ===
 ## PinCodeCordova
-A sample application demonstrating use of the WithAttempts Security Check.
+A sample application demonstrating use of the CredentialsValidation Security Check.
 
 ### Tutorials
-https://mobilefirstplatform.ibmcloud.com/tutorials/en/foundation/8.0/authentication-and-security/security-check-with-attempts/
+https://mobilefirstplatform.ibmcloud.com/tutorials/en/foundation/8.0/authentication-and-security/credentials-validation/
 
 ### Usage
 
@@ -15,7 +15,7 @@ https://mobilefirstplatform.ibmcloud.com/tutorials/en/foundation/8.0/authenticat
     - Add a platform by running the `cordova platform add` command.
     - Run the Cordova application by running the `cordova run` command.
 
-WithAttempts Security Check/adapter: https://github.com/MobileFirst-Platform-Developer-Center/SecurityAdapters/tree/release80
+CredentialsValidation Security Check adapter: https://github.com/MobileFirst-Platform-Developer-Center/SecurityCheckAdapters/tree/release80
 
 ### Supported Levels
 IBM MobileFirst Platform Foundation 8.0
@@ -26,7 +26,7 @@ Copyright 2015 IBM Corp.
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
-
+att
 http://www.apache.org/licenses/LICENSE-2.0
 
 Unless required by applicable law or agreed to in writing, software
