@@ -28,11 +28,11 @@ var PinCodeChallengeHandler = function(){
   // handleFailure
   PinCodeChallengeHandler.handleFailure = function(error) {
       WL.Logger.debug("Challenge Handler Failure!");
-      if(error.failure && error.failure == "account blocked"){
-         alert("No Remaining Attempts!");
+      if(error.failure != null && error.failure != undefined){
+         alert(error.failure);
       }
       else {
-         alert("Error! " + JSON.stringify(error));
+         alert("Unknown error");
       }
   };
 };
