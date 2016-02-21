@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="com.sample.pincodecordova" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0" xmlns:mfp="http://www.ibm.com/mobilefirst/cordova-plugin-mfp">
-    <name>PinCode</name>
+    <name>PinCodeCordova</name>
     <description>
         A sample Apache Cordova application demonstrating use of the "WithAttempts" security check.
     </description>
@@ -113,7 +113,7 @@
     </mfp:windows>
     <mfp:platformVersion>8.0.0.00-20160208-1043</mfp:platformVersion>
     <mfp:clientCustomInit enabled="false" />
-    <mfp:server runtime="mfp" url="http://9.148.225.134:9080" />
+    <mfp:server runtime="mfp" url="http://localhost:9080" />
     <mfp:directUpdateAuthenticityPublicKey />
     <mfp:languagePreferences>en</mfp:languagePreferences>
 </widget>
