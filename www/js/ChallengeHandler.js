@@ -20,13 +20,13 @@ var PinCodeChallengeHandler = function(){
       var msg = "";
 
       // Create the title string for the prompt
-      if(challenge.errorMsg != null){
+      if(challenge.errorMsg !== null){
           msg =  challenge.errorMsg + "\n";
       }
       else{
           msg = "This data requires a PIN code.\n";
       }
-      msg += "Remaining attempts: " + challenge.remainingAttempts
+      msg += "Remaining attempts: " + challenge.remainingAttempts;
 
       // Display a prompt for user to enter the pin code
       var pinCode = prompt(msg, "");
@@ -43,7 +43,7 @@ var PinCodeChallengeHandler = function(){
   // handleFailure
   PinCodeChallengeHandler.handleFailure = function(error) {
       WL.Logger.debug("Challenge Handler Failure!");
-      if(error.failure != null && error.failure != undefined){
+      if(error.failure !== null && error.failure !== undefined){
          alert(error.failure);
       }
       else {
