@@ -31,12 +31,14 @@ function getBalance() {
 
     resourceRequest.send().then(
         function(response) {
+            var jsonObj = JSON.parse(response.responseText);
             WL.Logger.debug("resourceRequest.send success: "+ response.responseText);
-            document.getElementById("balanceLabel").innerHTML = response.responseText;
+            document.getElementById("balanceLabel").innerHTML = JSON.stringify(jsonObj);
         },
         function(response) {
+            var jsonObj = JSON.parse(response.responseText);
             WL.Logger.debug(response.responseText);
-            document.getElementById("balanceLabel").innerHTML = response.errorMsg;
+            document.getElementById("balanceLabel").innerHTML = JSON.stringify(jsonObj);
         }
     );
 }
