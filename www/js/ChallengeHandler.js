@@ -14,7 +14,7 @@
 * limitations under the License.
 */
 var PinCodeChallengeHandler = function(){
-  PinCodeChallengeHandler = WL.Client.createWLChallengeHandler("PinCodeAttempts");
+  PinCodeChallengeHandler = WL.Client.createSecurityCheckChallengeHandler("PinCodeAttempts");
 
   PinCodeChallengeHandler.handleChallenge = function(challenge) {
       var msg = "";
@@ -33,8 +33,8 @@ var PinCodeChallengeHandler = function(){
       if(pinCode){ // calling submitChallengeAnswer with the entered value
           PinCodeChallengeHandler.submitChallengeAnswer({"pin":pinCode});
       }
-      else{ // calling submitFailure in case user pressed the cancel button
-          PinCodeChallengeHandler.submitFailure();
+      else{ // calling cancel in case user pressed the cancel button
+          PinCodeChallengeHandler.cancel();
       }
 
 
