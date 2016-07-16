@@ -44,10 +44,10 @@ var PinCodeChallengeHandler = function(){
   PinCodeChallengeHandler.handleFailure = function(error) {
       WL.Logger.debug("Challenge Handler Failure!");
       if(error.failure !== null && error.failure !== undefined){
-         navigator.notification.alert(error.failure);
+         alert(error.failure);
       }
       else {
-         navigator.notification.alert("Unknown error");
+         alert("Unknown error");
       }
   };
 };
