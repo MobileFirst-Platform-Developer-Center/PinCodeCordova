@@ -18,6 +18,8 @@ https://mobilefirstplatform.ibmcloud.com/tutorials/en/foundation/8.0/authenticat
  - `mfpdev app push` - to map the `accessRestricted` scope to the `PinCodeAttempts` security check.
  - `cordova run` - to run the application.
 
+3. Run the application in an Android Rmulator, iOS Simulator or physical device. Press the **Get Balance** button and enter "1234" to display the balance.
+
 ### Supported Levels
 IBM MobileFirst Platform Foundation 8.0
 
