@@ -35,7 +35,7 @@ function getBalance() {
             document.getElementById("balanceLabel").innerHTML = response.responseText;
         },
         function(response) {
-            WL.Logger.debug("resourceRequest.send success: " + response.errorMsg);
+            WL.Logger.debug("resourceRequest.send failure: " + response.errorMsg);
             document.getElementById("balanceLabel").innerHTML = response.errorMsg;
         }
     );
